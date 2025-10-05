@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TradeBeacon",
-  description: "Track real time Stock Prices, get personalized Alerts and explore detailed Company Insights",
+  title: "StockEase",
+  description:
+    "Track real time Stock Prices, get personalized Alerts and explore detailed Company Insights",
 };
 
 export default function RootLayout({
