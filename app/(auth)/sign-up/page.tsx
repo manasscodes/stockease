@@ -4,14 +4,20 @@ import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectField";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignUp = () => {
+  //setup router
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,9 +38,33 @@ const SignUp = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
-    } catch (e) {
-      console.error(e);
+      console.log("Submitting sign up data:", data);
+
+      // signUpWithEmail
+      const result = await signUpWithEmail(data);
+      console.log("Sign up result:", result);
+
+      if (result.success) {
+        // Show success message
+        toast.success("Account created successfully!", {
+          description: "Welcome to StockEase!",
+        });
+
+        //redirect to dashboard
+        router.push("/");
+      } else {
+        // Show error message from server
+        toast.error("Sign up failed", {
+          description: result.message || "Failed to create account",
+        });
+      }
+    } catch (error) {
+      console.error("Sign up error:", error);
+      // Display error to user
+      toast.error("Sign up failed", {
+        description:
+          error instanceof Error ? error.message : "Failed to create account",
+      });
     }
   };
   return (
@@ -120,7 +150,11 @@ const SignUp = () => {
           {isSubmitting ? "Creating Account" : "Start your investing Journey"}
         </Button>
 
-        <FooterLink text="Already have an account?" linkText="Sign in" href="/sign-in" />
+        <FooterLink
+          text="Already have an account?"
+          linkText="Sign in"
+          href="/sign-in"
+        />
       </form>
     </>
   );
