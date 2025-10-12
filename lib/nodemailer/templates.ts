@@ -97,7 +97,7 @@ export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
                     <!-- Header with Logo -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/a6fkjou7d/logo.png?updatedAt=1756378431634" alt="Signalist Logo" width="150" style="max-width: 100%; height: auto;">
+                            <img src="https://ik.imagekit.io/tss0lafnh/StockEase%20Logo.png?updatedAt=1760242772277" alt="StockEase Logo" width="150" style="max-width: 100%; height: auto;">
                         </td>
                     </tr>
                     
