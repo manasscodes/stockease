@@ -9,6 +9,7 @@ import {
 } from "./prompts";
 import { sendNewsSummaryEmail } from "../nodemailer";
 import { formatDateToday } from "../utils";
+import { getFormattedTodayDate } from "../utils";
 
 export const sendSignUpEmail = inngest.createFunction(
   { id: "sign-up-email" },
@@ -138,11 +139,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
         userNewsSummaries.map(async ({ user, newsContent }) => {
           if (!newsContent) return false;
 
-          return await sendNewsSummaryEmail({
-            email: user.email,
-            date: formatDateToday,
-            newsContent,
-          });
+          return await sendNewsSummaryEmail({ email: user.email, date: getFormattedTodayDate(), newsContent });
         })
       );
     });
